@@ -57,7 +57,7 @@ class Users {
         res.json({
           status: res.statusCode,
           msg: "please use another email address",
-        });
+        })
         console.log(error);
       } else {
         // create a token
@@ -74,19 +74,19 @@ class Users {
  async updateUser(req, res) {
   const userId = req.params.id;
   const newData = req.body;
-  
+
   const qry = `
-    UPDATE Users
-    SET ?
-    WHERE userID = ${userId};
-  `;
-  db.query(qry, [newData], (err, result) => {
-    if (err) throw err;
-    res.json({
-      status: res.statusCode,
-      msg: "User updated successfully",
-    });
-  });
+  UPDATE Users
+  SET ?
+  WHERE userID = ${userId};
+  `
+  db.query(qry, [newData], (err,result)=>{
+      if(err) throw err
+      res.json({
+          status: res.statusCode,
+          msg: "The user information is updated."
+      })
+  })
 }
 
 // deleteUser

@@ -14,7 +14,7 @@ userRouter.get('/',(req, res)=>{
             status: res.statusCode,
             msg: 'Failed to retrieve users'
         })
-    }
+    } 
  })
   
  userRouter.get('/:id',(req, res)=>{
