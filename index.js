@@ -2,8 +2,10 @@ import { userRouter, express } from "./Controllers/UserController.js";
 // import { productRouter } from "./Controllers/ProductsController.js";
 import cookieParser from "cookie-parser";
 import { errorHandling} from "./middleware/ErrorHandling.js";
+import {handleValidationErrors} from "./middleware/ValidationUser.js";
 import path from "path";
 import cors from "cors"
+import { body } from 'express-validator';
 import { config } from "dotenv";
 config()
 
@@ -34,6 +36,16 @@ app.get('^/$|/capstone', (req, res)=>{
 app.use('/users',userRouter)
 // app.use('/products', productRouter)
 app.use(errorHandling)
+// Route handler to handle form submissions
+app.post('/submit-form', [
+  body('email').isEmail().withMessage('Invalid email address'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+  handleValidationErrors, // Apply validation error handling middleware
+], (req, res) => {
+  res.json({ message: 'Form submitted successfully' });
+});
+
+
 app.listen(port,()=>{
     console.log(`server is running on port ${port}`);
 })
