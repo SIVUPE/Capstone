@@ -1,5 +1,5 @@
 import { userRouter, express } from "./Controllers/UserController.js";
-// import { productRouter } from "./Controllers/ProductsController.js";
+import { serviceRouter } from "./Controllers/ServicesController.js";
 import cookieParser from "cookie-parser";
 import { errorHandling} from "./middleware/ErrorHandling.js";
 import {handleValidationErrors} from "./middleware/ValidationUser.js";
@@ -34,8 +34,10 @@ app.get('^/$|/capstone', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './static/index.html'))
 })
 app.use('/users',userRouter)
-// app.use('/products', productRouter)
+app.use('/services', serviceRouter)
 app.use(errorHandling)
+
+
 // Route handler to handle form submissions
 app.post('/submit-form', [
   body('email').isEmail().withMessage('Invalid email address'),
