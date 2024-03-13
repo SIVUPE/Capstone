@@ -30,8 +30,13 @@ app.use(
         extended: true,
     }),
     cookieParser(),
-    cors()
+   
 )
+app.use(cors({
+   origin:"http://localhost:8080" ,
+   credentials:true
+
+}))
 app.get('^/$|/capstone', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, './static/index.html'))
 })
