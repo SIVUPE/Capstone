@@ -5,7 +5,7 @@ import { useCookies } from 'vue3-cookies'
 const {cookies} = useCookies()
 import router from '@/router'
 import AuthenticateUser from '@/service/AuthenticateUser'
-const DataURL = 'https://capstone-wnov.onrender.com'
+const DataURL = 'https://capstone-wnov.onrender.com/'
 
 export default createStore({
   state: {
@@ -172,10 +172,11 @@ export default createStore({
     async fetchServices(context) {
       try{
         let {results} = 
-        (await axios.get(`${DataURL}products`)).data
+        (await axios.get(`${DataURL}services`)).data
         if(results) {
           context.commit('setServices', results)
         }
+    
       }catch(e) {
         sweet({
           title: 'Error',
@@ -189,7 +190,7 @@ export default createStore({
       try{
         let {result} = (await axios.get(`${DataURL}services/${payload.id}`)).data
         if(result) {
-          context.commit('setServices', result)
+          context.commit('setService', result)
         }else {
           sweet({
             title: 'Retrieving a single service',
