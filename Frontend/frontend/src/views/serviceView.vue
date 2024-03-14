@@ -3,7 +3,6 @@
         <div class="row justify-content-center">
            <div class="col-7 text-black m-5">
                <div class="row" >
-                {{ service }}
                    <div class="col-7 d-flex align-items-center" v-if="service">
                     <img :src="service.servicesUrl" class="car-img-top" alt="" height="380">
                    </div>
