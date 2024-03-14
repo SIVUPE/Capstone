@@ -3,7 +3,7 @@ import { connection as db } from "../config/index.js";
 class Services {
     fetchServices(req, res) {
         const qry = `
-            SELECT serviceID, serviceName, serviceDescription, price, createdAt, updatedAt
+            SELECT serviceID, serviceName, serviceDescription, servicesUrl, price, createdAt, updatedAt
             FROM Services`;
         db.query(qry, (err, results) => {
             if (err) throw err;
@@ -16,7 +16,7 @@ class Services {
 
     fetchService(req, res) {
         const qry = `
-            SELECT serviceID, serviceName, serviceDescription, price, createdAt, updatedAt
+            SELECT serviceID, serviceName, serviceDescription, servicesUrl, price, createdAt, updatedAt
             FROM Services
             WHERE serviceID = ${req.params.id}`;
         db.query(qry, (err, result) => {
