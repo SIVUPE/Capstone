@@ -1,10 +1,10 @@
 <template>
     <div>
       <h1>Admin View</h1>
-      <button class="btn">
+      <button class="btn btn-dark">
         <RouterLink to="/admin">Services</RouterLink>
       </button>
-      <button class="btn">
+      <button class="btn btn-dark">
         <RouterLink to="/user">Users</RouterLink>
       </button>
       <table class="table" v-if="services && services.length > 0">
@@ -23,10 +23,10 @@
             <td>{{ service.price }}</td>
             <td></td>
             <td>
-              <button class="btn btn-warning" @click="postService(service)">
+              <button class="btn btn-dark " @click="postService(service)">
                 <i class="bi bi-bag-plus-fill">#$</i>
               </button>
-              <button class="btn btn-warning" @click="deleteService(service.serviceID)">
+              <button class="btn btn-dark" @click="deleteService(service.serviceID)">
                 <i class="bi bi-trash3-fill"></i>delete
               </button>
             </td>
@@ -57,6 +57,7 @@
             });
         }
       },
+      
       postService() {
         // Assuming serviceName, quantity, amount, and prodUrl are bound to data properties
         const newService = {
@@ -92,7 +93,6 @@
   @media only screen and (max-width: 600px) {
     .btn {
       background-color:#152733;
-      border: #152733;
     }
   }
   </style>
