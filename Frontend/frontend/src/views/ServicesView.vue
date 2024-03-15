@@ -16,7 +16,7 @@
             <div class="row mx-5 gap-5 justify-content-center  " v-if="services">
             <Card v-for="service in services" :key="service.servicesID" class="mb-3 ">
                 <template #cardHeader>
-                    <img :src="service.servicesUrl" class="car-img-top" alt="image" height="200">
+                    <img :src="service.servicesUrl" class="car-img-top" alt="image" width="200">
                     <h4 class="card-title">{{ service.serviceName }}</h4>
                     <h6 class="card-title">{{ service.serviceDescription }}</h6>
                 </template>

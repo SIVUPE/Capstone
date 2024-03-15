@@ -1,5 +1,5 @@
 <template>
-    <div class="product bg-image">
+    <div class="services bg-image">
         <div class="row justify-content-center">
            <div class="col-7 text-black m-5">
                <div class="row" >
@@ -43,5 +43,37 @@
 </script>
 
 <style scoped>
-
-</style>
+   .head{
+    text-transform:uppercase;
+  font-family: 'DM sans';
+  font-size: xx-large;
+  color: #AF8C53;
+   }
+   .lead{
+    font-size:medium;
+   }
+   .vue{
+       position: absolute;
+       margin-left: 70rem;
+       margin-top: 15rem;
+       transform: rotate(90deg);
+   }
+   .Portrait-btn {
+       margin-bottom: 20px;
+       border: 2px solid #AF8C53;
+    color: #AF8C53;
+  padding:  10px;
+  background-color: transparent;
+   }
+   .w-100{
+    color: #AF8C53;
+    size: 10px;
+   }
+   .services {
+       overflow-y: hidden;
+       overflow-x: hidden;
+   }
+   .col-7{
+    width: auto;
+   }
+   </style>
