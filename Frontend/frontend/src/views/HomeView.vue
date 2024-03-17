@@ -35,7 +35,7 @@
        </div>
 
        <div class="different-hotels">
-        <img src="https://raw.githubusercontent.com/MichaelZhou334/Hotel-Landing-Page/main/images/villa.jpg" loading="lazy " alt="hotel front">
+        <img src="https://raw.githubusercontent.com/MichaelZhou334/Hotel-Landing-Page/main/images/villa.jpg" loading="lazy" alt="hotel front">
         <div class="different-hotels-div">
         <h2>Homes & Villas</h2>
         <p>Homes & Villas was designed to provide travelers with access to high-end vacation rentals, such as entire homes, villas, and luxury accommodations. The platform featured a curated selection of upscale and unique properties, with distinctive architectural features, stunning views, or premium amenities. We offered additional concierge services, which could include personalized check-in experiences, access to local recommendations, and assistance with planning activities and dining reservations.</p>
