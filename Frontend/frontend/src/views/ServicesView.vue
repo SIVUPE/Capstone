@@ -64,6 +64,10 @@ export default {
 }
 </script>
 <style scoped>
+.main{
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
 .products{
     margin-top:110px ;
 }
@@ -78,12 +82,12 @@ export default {
   background-color: transparent;
   margin-left: 50px;
 }
-.main{
+/* .main{
     height: 350vh;
     background-color:#252926 ;
-}
+} */
 .mb-3 {
-  border: 2px solid #AF8C53;
+  border: 2px solid #042f42;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -93,7 +97,7 @@ export default {
   text-transform: uppercase;
   font-family: 'DM sans';
   font-size: medium;
-  color: #AF8C53;
+  color: #042f42;
 }
 .card:hover {
   transform: translateY(-5px);

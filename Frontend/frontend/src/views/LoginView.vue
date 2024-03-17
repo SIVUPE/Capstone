@@ -45,6 +45,51 @@
 
 </body>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      rememberMe: false
+    }
+  },
+  methods: {
+    login() {
+      // Validate email and password if needed
+      if (this.email && this.password) {
+        // Perform login logic here
+        // For demonstration, just alert that user is logged in
+        alert('You are logged in!');
+      } else {
+        // Handle case when email or password is missing
+        alert('Please enter both email and password');
+      }
+    },
+    signInWithGoogle() {
+      // Implement Google sign-in logic
+      console.log('Signing in with Google');
+      // Handle success and error cases
+    },
+    signInWithFacebook() {
+      // Implement Facebook sign-in logic
+      console.log('Signing in with Facebook');
+      // Handle success and error cases
+    },
+    sub(event) {
+      if (this.loginInput === '' || this.senha === '') {
+        this.alert = true;
+        this.log = 'User and Password are required.';
+        event.preventDefault();
+      } else {
+        this.log = 'Go';
+      }
+    }
+  }
+};
+</script>
+
 <style scoped>
 body{
     margin: 0;
@@ -52,7 +97,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url('https://i.ibb.co/yFWzhXd/login-3-bg.png');
+    background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px,transparent 2px, transparent 4px),linear-gradient(0deg, rgb(70, 143, 234),rgb(187, 235, 205));
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,7 +107,7 @@ body{
 
 .form-2-wrapper {
     background: #9d00ff29;
-    padding: 50px;
+    padding: 50px;  
     border-radius: 8px;
 }
 input.form-control{
