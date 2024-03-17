@@ -22,18 +22,6 @@
                             </div>
 
                            <div class="col-md-12">
-                                <select class="form-select mt-3" required>
-                                      <option selected disabled value="">Position</option>
-                                      <option value="jweb">Junior Web Developer</option>
-                                      <option value="sweb">Senior Web Developer</option>
-                                      <option value="pmanager">Project Manager</option>
-                               </select>
-                                <div class="valid-feedback">You selected a position!</div>
-                                <div class="invalid-feedback">Please select a position!</div>
-                           </div>
-
-
-                           <div class="col-md-12">
                               <input class="form-control" type="password" name="password" placeholder="Password" required>
                                <div class="valid-feedback">Password field is valid!</div>
                                <div class="invalid-feedback">Password field cannot be blank!</div>
@@ -76,15 +64,19 @@
 
 <script>
 export default {
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      gender: '',
+      confirm: false
+    };
+  },
   methods: {
     submitForm() {
-      const form = event.target;
-      if (!form.checkValidity()) {
-        event.stopPropagation();
-      } else {
-        // Handle form submission here
-      }
-      form.classList.add('was-validated');
+      // Perform registration action here using name, email, password, gender, and confirm
+      alert('Registration submitted');
     }
   }
 };
@@ -101,7 +93,7 @@ export default {
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
 }
- 
+
 html, body {
     height: 100%;
     background-color: #152733;

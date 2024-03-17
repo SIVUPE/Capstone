@@ -1,7 +1,7 @@
 <template>
     <div>
       <h1>User View</h1>
-      <button class="btn btn-dark"><RouterLink to="/admin">Products</RouterLink></button>
+      <button class="btn btn-dark"><RouterLink to="/admin">Services</RouterLink></button>
       <button class="btn btn-dark"><RouterLink to="/user">Users</RouterLink></button>
       
       <table class="table" v-if="users" >

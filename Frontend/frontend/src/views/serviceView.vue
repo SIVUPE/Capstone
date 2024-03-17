@@ -15,9 +15,34 @@
                            <div class="mbc">
                                <p> Amount: R{{ service.price }}</p>
                            </div>
-                       </div>
-                       <div class="d-flex flex-column align-items-start">
-                           <button class="Portrait-btn p-2 ">Book</button>
+                           <div class="d-flex flex-column align-items-start">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Book
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Some text in the modal
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
                        </div>
                    </div>
                </div>
@@ -47,7 +72,7 @@
     text-transform:uppercase;
   font-family: 'DM sans';
   font-size: xx-large;
-  color: #AF8C53;
+  color: #042f42;
    }
    .lead{
     font-size:medium;
@@ -60,20 +85,21 @@
    }
    .Portrait-btn {
        margin-bottom: 20px;
-       border: 2px solid #AF8C53;
-    color: #AF8C53;
+       border: 2px solid #042f42;
+    color: #042f42;
   padding:  10px;
   background-color: transparent;
    }
    .w-100{
-    color: #AF8C53;
+    color: #042f42;
     size: 10px;
    }
    .services {
        overflow-y: hidden;
        overflow-x: hidden;
+       /* background-image: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px,transparent 2px, transparent 4px),linear-gradient(0deg, rgb(70, 143, 234),rgb(187, 235, 205)); */
    }
    .col-7{
-    width: auto;
+    width: fit-content;
    }
    </style>
