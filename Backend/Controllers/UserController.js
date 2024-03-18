@@ -62,16 +62,16 @@ userRouter.get('/',(req, res)=>{
     }
   })
   
-  userRouter.post('/login', bodyParser.json(), (req, res) => {
-    try {
-      users.loginUser(req, res)
-    } catch(e) {
-      res.json({
-        status: res.statusCode,
-        msg: 'Failed to login',
-      })
+  userRouter.post('/login', bodyParser.json(), (req, res)=>{
+    try{
+        users.login(req, res)
+    }catch(e) {
+        res.json({
+            status: res.statusCode,
+            msg: "Failed to log in"
+        })
     }
- });
+})
 
 
  export{

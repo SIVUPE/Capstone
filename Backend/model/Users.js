@@ -110,35 +110,32 @@ class Users {
   }
 
   login(req, res) {
-    const {email, userPwd} = req.body
+    const {emailAdd, userPwd} = req.body 
     const qry = `
-    SELECT userID,
-    username,
-    email,
-    userPwd,
-    userRole,
-    createdAt
+    SELECT userID, firstName, lastName, 
+    userAge, gender, emailAdd, userPwd, userRole
     FROM Users
-    WHERE email = '${email}';
+    WHERE emailAdd = '${emailAdd}';
     `
     db.query(qry, async(err, result)=>{
-        if(err) throw err
+        if(err) throw err 
         if(!result?.length){
             res.json({
-                status: res.statusCode,
+                status: res.statusCode, 
                 msg: "You provided a wrong email address."
             })
         }else {
+            // Validate password
             const validPass = await compare(userPwd, result[0].userPwd)
             if(validPass) {
                 const token = createToken({
-                    email,
+                    emailAdd, 
                     userPwd
                 })
                 res.json({
                     status: res.statusCode,
                     msg: "You're logged in",
-                    token,
+                    token, 
                     result: result[0]
                 })
             }else {
@@ -149,9 +146,7 @@ class Users {
             }
         }
     })
-    console.log(err);
- }0
-
+}
 }
 
 export { Users };
