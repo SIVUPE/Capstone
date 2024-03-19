@@ -123,7 +123,7 @@ class Users {
         if(!result?.length){
             res.json({
                 status: res.statusCode, 
-                msg: err.message
+                msg: err?.message
             })
         }else {
             // Validate password
