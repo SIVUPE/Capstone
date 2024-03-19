@@ -1,236 +1,118 @@
 <template>
-    <body>
-    <div class="form-body">
-        <div class="row">
-            <div class="form-holder">
-                <div class="form-content">
-                    <div class="form-items">
-                        <h3>Register Today</h3>
-                        <p>Fill in the data below.</p>
-                        <form class="requires-validation" novalidate>
+    <div class="users-table vh-100 d-flex justify-content-center align-items-center" style="">
+      <div class="container">
+        <div class="login">
+          <h1>Register</h1>
 
-                            <div class="col-md-12">
-                               <input class="form-control" type="text" name="name" placeholder="Full Name" required>
-                               <div class="valid-feedback">Username field is valid!</div>
-                               <div class="invalid-feedback">Username field cannot be blank!</div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
-                                 <div class="valid-feedback">Email field is valid!</div>
-                                 <div class="invalid-feedback">Email field cannot be blank!</div>
-                            </div>
-
-                           <div class="col-md-12">
-                              <input class="form-control" type="password" name="password" placeholder="Password" required>
-                               <div class="valid-feedback">Password field is valid!</div>
-                               <div class="invalid-feedback">Password field cannot be blank!</div>
-                           </div>
-
-
-                           <div class="col-md-12 mt-3">
-                            <label class="mb-3 mr-1" for="gender">Gender: </label>
-
-                            <input type="radio" class="btn-check" name="gender" id="male" autocomplete="off" required>
-                            <label class="btn btn-sm btn-outline-secondary" for="male">Male</label>
-
-                            <input type="radio" class="btn-check" name="gender" id="female" autocomplete="off" required>
-                            <label class="btn btn-sm btn-outline-secondary" for="female">Female</label>
-
-                            <input type="radio" class="btn-check" name="gender" id="secret" autocomplete="off" required>
-                            <label class="btn btn-sm btn-outline-secondary" for="secret">Secret</label>
-                               <div class="valid-feedback mv-up">You selected a gender!</div>
-                                <div class="invalid-feedback mv-up">Please select a gender!</div>
-                            </div>
-
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                          <label class="form-check-label">I confirm that all data are correct</label>
-                         <div class="invalid-feedback">Please confirm that the entered data are all correct!</div>
-                        </div>
-                  
-
-                            <div class="form-button mt-3">
-                                <button id="submit" type="submit" class="btn btn-primary">Register</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+          <form @submit.prevent="register" class="needs-validation" novalidate>
+            <div class="input-box mb-3">
+              <input v-model="firstName" type="text" class="form-control" placeholder="First Name" required>
+              <i class="fa fa-user"></i>
             </div>
+            <div class="input-box mb-3">
+              <input v-model="lastName" type="text" class="form-control" placeholder="Last Name" required>
+              <i class="fa fa-user"></i>
+            </div>
+            <div class="input-box mb-3">
+              <select v-model="gender" id="gender" class="form-select" required>
+                <option value="" disabled>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <i class="fa fa-venus-mars"></i>
+            </div>
+            <div class="input-box mb-3">
+              <select v-model="userRole" id="role" class="form-select" required>
+                <option value="" disabled>Select Role</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+              </select>
+              <i class="fa fa-cogs"></i>
+            </div>
+            <div class="input-box mb-3">
+              <input v-model="emailAdd" type="email" class="form-control" placeholder="Email" required>
+              <i class="fa fa-envelope"></i>
+            </div>
+            <div class="input-box mb-3">
+              <input v-model="userPwd" type="password" class="form-control" placeholder="Password" required>
+              <i class="fa fa-lock"></i>
+            </div>
+            <div class="input-box mb-3">
+              <input v-model="userProfile" type="text" class="form-control" placeholder="User Profile">
+              <i class="fa fa-user-circle"></i>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" v-model="saveAccount">
+              <label class="form-check-label">Save account for future logins</label>
+            </div>
+            <p class="text-center">Already have an account? <router-link to="/login">Login</router-link></p>
+            <button type="submit" class="btn btn-primary d-block mx-auto" :disabled="submitting || !formIsValid">
+              {{ submitting ? 'Creating Account...' : 'Create an account' }}
+            </button>
+          </form>
         </div>
+      </div>
     </div>
-</body>
-</template>
+  </template>
+  
+  <script>
+  export default {
+    data() {
+      return {
+        firstName: '',
+        lastName: '',
+        gender: '',
+        userRole: '',
+        emailAdd: '',
+        userPwd: '',
+        userProfile: '',
+        saveAccount: false,
+        submitting: false,
+      };
+    },
+    computed: {
+      formIsValid() {
+        return (
+          this.firstName.trim() !== '' &&
+          this.lastName.trim() !== '' &&
+          this.gender !== '' &&
+          this.userRole !== '' &&
+          this.emailAdd.trim() !== '' &&
+          this.userPwd.trim() !== ''
+        );
+      }
+    },
+    methods: {
+      async register() {
+        try {
+        if (this.formIsValid) {
+          const user = {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            gender: this.gender,
+            userRole: this.userRole,
+            emailAdd: this.emailAdd,
+            userPwd: this.userPwd,
+            userProfile: this.userProfile,
+          };
 
-<script>
-export default {
-  data() {
-    return {
-      name: '',
-      email: '',
-      password: '',
-      gender: '',
-      confirm: false
-    };
-  },
-  methods: {
-    submitForm() {
-      // Perform registration action here using name, email, password, gender, and confirm
-      alert('Registration submitted');
-    }
-  }
-};
-</script>
+          console.log(user);
 
+         this.$store.dispatch('register', user);
 
-<style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
-
-*, body {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-html, body {
-    height: 100%;
-    background-color: #152733;
-    overflow: hidden;
-}
-
-
-.form-holder {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 100vh;
-}
-
-.form-holder .form-content {
-    position: relative;
-    text-align: center;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-    padding: 60px;
-}
-
-.form-content .form-items {
-    border: 3px solid #fff;
-    padding: 40px;
-    display: inline-block;
-    width: 100%;
-    min-width: 540px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    text-align: left;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-}
-
-.form-content h3 {
-    color: #fff;
-    text-align: left;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.form-content h3.form-title {
-    margin-bottom: 30px;
-}
-
-.form-content p {
-    color: #fff;
-    text-align: left;
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 20px;
-    margin-bottom: 30px;
-}
-
-
-.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
-    color: #fff;
-}
-
-.form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content select {
-    width: 100%;
-    padding: 9px 20px;
-    text-align: left;
-    border: 0;
-    outline: 0;
-    border-radius: 6px;
-    background-color: #fff;
-    font-size: 15px;
-    font-weight: 300;
-    color: #8D8D8D;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    margin-top: 16px;
-}
-
-
-.btn-primary{
-    background-color: #6C757D;
-    outline: none;
-    border: 0px;
-     box-shadow: none;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
-    background-color: #495056;
-    outline: none !important;
-    border: none !important;
-     box-shadow: none;
-}
-
-.form-content textarea {
-    position: static !important;
-    width: 100%;
-    padding: 8px 20px;
-    border-radius: 6px;
-    text-align: left;
-    background-color: #fff;
-    border: 0;
-    font-size: 15px;
-    font-weight: 300;
-    color: #8D8D8D;
-    outline: none;
-    resize: none;
-    height: 120px;
-    -webkit-transition: none;
-    transition: none;
-    margin-bottom: 14px;
-}
-
-.form-content textarea:hover, .form-content textarea:focus {
-    border: 0;
-    background-color: #ebeff8;
-    color: #8D8D8D;
-}
-
-.mv-up{
-    margin-top: -9px !important;
-    margin-bottom: 8px !important;
-}
-
-.invalid-feedback{
-    color: #ff606e;
-}
-
-.valid-feedback{
-   color: #2acc80;
-}
-</style>
+          // this.resetForm();
+        }
+      } catch (error) {
+        console.error('Error registering user:', error.response ? error.response.data : error.message);
+      
+      } finally {
+        this.submitting = false;
+      }
+      },
+      resetForm() {
+        Object.assign(this.$data, this.$options.data.call(this));
+      },
+    },
+  };
+  </script>
+  
