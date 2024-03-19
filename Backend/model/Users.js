@@ -117,12 +117,13 @@ class Users {
     FROM Users
     WHERE emailAdd = '${emailAdd}';
     `
+    // "You provided a wrong email address."
     db.query(qry, async(err, result)=>{
         if(err) throw err 
         if(!result?.length){
             res.json({
                 status: res.statusCode, 
-                msg: "You provided a wrong email address."
+                msg: err.message
             })
         }else {
             // Validate password
