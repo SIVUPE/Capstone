@@ -33,6 +33,7 @@ export default createStore({
   actions: {
     async register(context, payload) {
       try{
+        console.log(payload);
         let {msg} = (await axios.post(`${DataURL}users/register`, payload)).data
         if(msg) {
           context.dispatch('fetchUsers')
@@ -139,7 +140,7 @@ export default createStore({
        if(result){
         context.commit('setUser', {msg, result})
         cookies.set('LegitUser', {
-          msg, token, result
+          token, msg, result
         })
         AuthenticateUser.applyToken(token)
         sweet({
@@ -161,7 +162,7 @@ export default createStore({
       }catch(e) {
         sweet({
           title: 'Error',
-          text: 'Failed to login.',
+          text: e.message,
           icon: "error",
           timer: 2000
         })
@@ -207,7 +208,8 @@ export default createStore({
           timer: 2000
         }) 
       }
-    }
+    },
+
   },
   modules: {
   }
