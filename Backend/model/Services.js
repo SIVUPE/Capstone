@@ -46,7 +46,7 @@ class Services {
     const qry = `
     UPDATE Services 
     SET ?
-    WHERE prodID = ${req.params.id};`;
+    WHERE serviceID = ${req.params.id};`;
     db.query(qry, [req.body], (err) => {
       if (err) throw err;
       res.json({
