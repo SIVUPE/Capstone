@@ -42,20 +42,19 @@ class Services {
         });
     }
 
-    updateService(req, res) {
-        const { serviceName, serviceDescription, price } = req.body;
-        const qry = `
-            UPDATE Services
-            SET serviceName = ?, serviceDescription = ?, price = ?
-            WHERE serviceID = ${req.params.id}`;
-        db.query(qry, [serviceName, serviceDescription, price], (err) => {
-            if (err) throw err;
-            res.json({
-                status: res.statusCode,
-                msg: "The service information has been updated.",
-            });
-        });
-    }
+     async updateProduct(req, res) {
+    const qry = `
+    UPDATE Products 
+    SET ?
+    WHERE prodID = ${req.params.id};`;
+    db.query(qry, [req.body], (err) => {
+      if (err) throw err;
+      res.json({
+        status: res.statusCode,
+        msg: "products updated",
+      });
+    });
+  }
 
     deleteService(req, res) {
         const qry = `
