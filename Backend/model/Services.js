@@ -42,16 +42,16 @@ class Services {
         });
     }
 
-     async updateProduct(req, res) {
+     async updateService(req, res) {
     const qry = `
-    UPDATE Products 
+    UPDATE Services 
     SET ?
     WHERE prodID = ${req.params.id};`;
     db.query(qry, [req.body], (err) => {
       if (err) throw err;
       res.json({
         status: res.statusCode,
-        msg: "products updated",
+        msg: "services updated",
       });
     });
   }
