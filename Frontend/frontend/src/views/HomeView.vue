@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="hotel-front-container">
-        <img src="https://raw.githubusercontent.com/MichaelZhou334/Hotel-Landing-Page/main/images/hotel_front.jpg" loading="lazy" alt="picture of the front of the hotel" class="hotel-front">
+        <img src="https://d3kf9i8rnujlxt.cloudfront.net/web/images/Westin-Front-Desk-Pods.JPG?mtime=20180110151945&focal=none " loading="lazy" alt="picture of the front of the hotel" class="hotel-front">
        </div>
 
 

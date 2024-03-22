@@ -1,6 +1,16 @@
 <template>
-    <div class="location-ask">
+
+
+  
+  <div class="theme-switch-wrapper justify-content-center align-items-center" >
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" v-model="darkMode" @change="switchTheme" />
+      <div class="slider round"></div>
+     </label>
+    <div class="description">Dark Mode</div>
+  </div>
       <span class="where-to">Where to?</span> <span class="required">(Required) </span> <br />
+    <div class="location-ask">
       <div class="booking">
         <label class="location-label" for="location">Location:</label>
         <input v-model="location" type="text" class="location" placeholder="City, Location, Hotel" required id="location">
@@ -36,7 +46,20 @@
   </template>
   
   <script>
+  import { ref } from 'vue';
   export default {
+    setup() {
+    const darkMode = ref(false);
+    const switchTheme = () => {
+      document.documentElement.setAttribute('data-theme', darkMode.value ? 'dark' : 'light');
+    };
+
+    return {
+      darkMode,
+      switchTheme
+    };
+  },
+    
     data() {
       return {
         location: null,
@@ -44,10 +67,25 @@
         showRoomPopup: false,
         rooms: 1,
         adults: 1,
-        kids: 0
+        kids: 0,
+        checkinDate: null, 
+        checkoutDate: null
+        
+        // submitForm
+  
       };
     },
+    
     methods: {
+      minCheckoutDate() {
+      if (this.checkinDate) {
+        const minDate = new Date(this.checkinDate);
+        minDate.setDate(minDate.getDate() + 1); 
+        return minDate.toISOString().split('T')[0];
+      }
+      return new Date().toISOString().split('T')[0];
+      
+    },
       openDatePopup() {
         this.showDatePopup = true;
       },
@@ -61,181 +99,466 @@
         this.showRoomPopup = false;
       },
       reserveRoom() {
-        // Perform action to reserve room using location, rooms, adults, and kids
         alert('Room reserved');
       }
-    }
+    },
+
+    
+
   };
   </script>
-  <style scoped>
-  @media only screen and (max-width: 768px) {
-    header ul {
-        display: block;
-        position: fixed;
-        left: -100%;
-        top: 7rem;
-        flex-direction: column;
-        background-color: #fff;
-        width: 100%;
-        border-radius: 10px;
-        text-align: center;
-        transition: 0.5s;
-        box-shadow: 0 10px 27px #000;
-        z-index: 20;
-    }
+  <style scoped >
+:root {
+  --primary-color: #010712;
+  --secondary-color: #818386;
+  --bg-color: #FCFDFD;
+  --button-color: #3B3636;
+  --h1-color: #3F444C;
 }
-
-/* Typo */
-
-@import 'https://fonts.googleapis.com/css?family=Montserrat|Varela|Oswald:400,700';
-
-/* Main */
-
-body {
-  background-color: #F4F4F4;
+[data-theme="dark"] {
+  --primary-color: #FCFDFD;
+  --secondary-color: #818386;
+  --bg-color: #010712;
+  --button-color: #818386;
+  --h1-color: #FCFDFD;
 }
-
-main {
-  width: 375px;
-  height: 667px;
-  margin: 40px auto 0 auto;
-  border: 1px solid #F4F4F4; 
-  background-color: #FFFFFF;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, .2);
-  position: relative;
+* {
+  margin: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 }
-
-section {
-  width: 315px;
-  margin: 0 auto;
+.contact-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-color);
 }
-
-/* Navigation */
-
-.navigation {
-  margin-top: 40px;
-  overflow: hidden;
-  height: 30px;
-}
-.back-to-home {
-  float: left;
-}
-.search {
-  float: right;
-}
-
-/* Restaurant */
-
-.restaurant div:nth-child(1) {
-  width: 95px;
-  height: 95px;
-  margin: 0 auto;
-  border: 6px solid #474850;
-  border-radius: 50%;
-  background: url("http://www.phuketdining.com/images/casuarina_large.jpg") no-repeat;
+.left-col {
+  width: 45vw;
+  height: 100%;
+  background-image: url("https://images.pexels.com/photos/931018/pexels-photo-931018.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
   background-size: cover;
-  box-shadow: 0 5px 9px 0 rgba(71, 72, 80, .5);
+  background-repeat: no-repeat;
 }
-.restaurant h1 {
-  padding: 0;
-  margin: 30px 0 0 0;
-  text-align: center;
-  text-transform: uppercase;
-  color: #64666F;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+.logo {
+  width: 10rem;
+  padding: 1.5rem;
 }
-
-/* Number of tables to book */
-
-.number-of-tables {
-  text-align: center;
-  margin-top: 60px;
+.right-col {
+  background: var(--bg-color);
+  width: 50vw;
+  height: 100vh;
+  padding: 5rem 3.5rem;
 }
-.number-of-tables h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Varela', sans-serif;
-  font-size: 16px;
-  color: #707076
-}
-.number-of-tables div {
-  display: inline-block;
-}
-.counter {
-  font-family: 'Oswald', sans-serif;
+h1, label, button, .description {
+  font-family: 'Jost', sans-serif;
   font-weight: 400;
-  font-size: 72px;
-  margin: 0 60px;
-  color: #5E606A;
+  letter-spacing: 0.1rem;
 }
-.minus, .plus {
-  height: 72px;
-  width: 30px;
-  vertical-align: top;
+h1 {
+  color:var(--h1-color);
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  letter-spacing: 0.5rem;
+  font-weight: 300;
+}
+p {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  letter-spacing: 0.01rem;
+  width: 40vw;
+  margin: 0.25rem 0;
+}
+label, .description {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 0.625rem;
+}
+form {
+  width: 31.25rem;
   position: relative;
+  margin-top: 2rem;
+  padding: 1rem 0;
 }
-.minus svg, .plus svg {
+input, textarea, label {
+  width: 40vw;
+  display: block;
+}
+p, placeholder, input, textarea {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+input::placeholder, textarea::placeholder {
+  color: var(--primary-color);
+}
+input, textarea {
+  color: var(--primary-color);
+  font-weight: 500;
+  background: var(--bg-color);
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  outline: none;
+}
+textarea {
+  resize: none;
+}
+button {
+  text-transform: uppercase;
+  font-weight: 300;
+  background: var(--button-color);
+  color: var(--bg-color);
+  width: 10rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input:hover, textarea:hover, button:hover {
+  opacity: 0.5;
+}
+button:active {
+  opacity: 0.8;
+}
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 160px;
+  right: 0;
+}
+.description {
+    margin-left: 1.25rem;
+  }
+.theme-switch {
   display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+.theme-switch input {
+  display:none;
+}
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  
+  right: 0;
+  top: 0;
+  transition: .4s;
 }
-
-/* Date and time */
-
-.choose-date {
-  margin-top: 70px;
-}
-.choose-date h2, .choose-date div {
-  text-align: center;
-}
-.choose-date h2 {
-  font-family: 'Varela', sans-serif;
-  font-size: 16px;
-  margin-bottom: 20px;
-  color: #707076;
-}
-.choose-date h2 span {
-  font-family: "Verdana", sans-serif;
-}
-.choose-date div {
-  font-family: 'Oswald', sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 20px;
-  word-spacing: 5px;
-  color: #5E606A;
-}
-.choose-date div span {
-  font-family: "Montserrat", sans-serif;
-  font-size: 25px;
-}
-
-/* Confirm */
-
-.confirm-book {
-  width: 255px;
-  height: 46px;
-  line-height: 46px;
+.slider:before {
+  background-color: #fff;
+  bottom: 0.25rem;
+  content: "";
+  width: 26px;
+  height: 26px;
+  left: 0.25rem;
   position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
-  background-color: #474850;
-  color: #FFFFFF;
-  box-shadow: 0 12px 15px -9px rgba(71, 72, 80, .5);
+  transition: .4s;
 }
-
-/* Footer */
-
-
+input:checked + .slider {
+  background-color: var(--button-color);
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+#error, #success-msg {
+  width: 40vw;
+  margin: 0.125rem 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-family: 'Jost';
+  color: var(--secondary-color);
+  }
+@media only screen and (max-width: 950px) {
+  .logo {
+    width: 8rem;
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
+  p {
+    font-size: 0.7rem;
+  }
+  input, textarea, button {
+    font-size: 0.65rem;
+  }
+  .description {
+    font-size: 0.3rem;
+    margin-left: 0.4rem;
+  }
+  button {
+    width: 7rem;
+  }
+  .theme-switch-wrapper {
+    width: 120px;
+  }
+  .theme-switch {
+  height: 28px;
+  width: 50px;
+}
+.theme-switch input {
+  display:none;
+}
+.slider:before {
+  background-color: #fff;
+  bottom: 0.25rem;
+  content: "";
+  width: 20px;
+  height: 20px;
+  left: 0.25rem;
+  position: absolute;
+  transition: .4s;
+}
+  input:checked + .slider:before {
+  transform: translateX(16px);
+}
+.slider.round {
+  border-radius: 15px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+}
+</style><style>
+:root {
+  --primary-color: #010712;
+  --secondary-color: #818386;
+  --bg-color: #FCFDFD;
+  --button-color: #3B3636;
+  --h1-color: #3F444C;
+}
+[data-theme="dark"] {
+  --primary-color: #FCFDFD;
+  --secondary-color: #818386;
+  --bg-color: #010712;
+  --button-color: #818386;
+  --h1-color: #FCFDFD;
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+.contact-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-color);
+}
+.left-col {
+  width: 45vw;
+  height: 100%;
+  background-image: url("https://images.pexels.com/photos/931018/pexels-photo-931018.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.logo {
+  width: 10rem;
+  padding: 1.5rem;
+}
+.right-col {
+  background: var(--bg-color);
+  width: 50vw;
+  height: 100vh;
+  padding: 5rem 3.5rem;
+}
+h1, label, button, .description {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+}
+h1 {
+  color:var(--h1-color);
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  letter-spacing: 0.5rem;
+  font-weight: 300;
+}
+p {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  letter-spacing: 0.01rem;
+  width: 40vw;
+  margin: 0.25rem 0;
+}
+label, .description {
+  color: var(--secondary-color);
+  text-transform: uppercase;
+  font-size: 0.625rem;
+}
+form {
+  width: 31.25rem;
+  position: relative;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+input, textarea, label {
+  width: 40vw;
+  display: block;
+}
+p, placeholder, input, textarea {
+  font-family: 'Helvetica Neue', sans-serif;
+}
+input::placeholder, textarea::placeholder {
+  color: var(--primary-color);
+}
+input, textarea {
+  color: var(--primary-color);
+  font-weight: 500;
+  background: var(--bg-color);
+  border: none;
+  border-bottom: 1px solid var(--secondary-color);
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  outline: none;
+}
+textarea {
+  resize: none;
+}
+button {
+  text-transform: uppercase;
+  font-weight: 300;
+  background: var(--button-color);
+  color: var(--bg-color);
+  width: 10rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input:hover, textarea:hover, button:hover {
+  opacity: 0.5;
+}
+button:active {
+  opacity: 0.8;
+}
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 160px;
+  right: 0;
+}
+.description {
+    margin-left: 1.25rem;
+  }
+.theme-switch {
+  display: inline-block;
+  height: 34px;
+  position: relative;
+  width: 60px;
+}
+.theme-switch input {
+  display:none;
+}
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+.slider:before {
+  background-color: #fff;
+  bottom: 0.25rem;
+  content: "";
+  width: 26px;
+  height: 26px;
+  left: 0.25rem;
+  position: absolute;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: var(--button-color);
+}
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+#error, #success-msg {
+  width: 40vw;
+  margin: 0.125rem 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-family: 'Jost';
+  color: var(--secondary-color);
+  }
+@media only screen and (max-width: 950px) {
+  .logo {
+    width: 8rem;
+  }
+  h1 {
+    font-size: 1.75rem;
+  }
+  p {
+    font-size: 0.7rem;
+  }
+  input, textarea, button {
+    font-size: 0.65rem;
+  }
+  .description {
+    font-size: 0.3rem;
+    margin-left: 0.4rem;
+  }
+  button {
+    width: 7rem;
+  }
+  .theme-switch-wrapper {
+    width: 120px;
+  }
+  .theme-switch {
+  height: 28px;
+  width: 50px;
+}
+.theme-switch input {
+  display:none;
+}
+.slider:before {
+  background-color: #fff;
+  bottom: 0.25rem;
+  content: "";
+  width: 20px;
+  height: 20px;
+  left: 0.25rem;
+  position: absolute;
+  transition: .4s;
+}
+  input:checked + .slider:before {
+  transform: translateX(16px);
+}
+.slider.round {
+  border-radius: 15px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+}
+.location-ask{
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100vh;
+}
 </style>
-  
   
  

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg justify-content-end  bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
                   </li>
                   
                   <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <button class="btn dropdown-toggle text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <i class="bi bi-person-circle"></i>
                     </button>
                     <ul class="dropdown-menu">
@@ -45,6 +45,9 @@
               </ul>
           </div>
       </div>
+            <router-link class="links" v-if="userRole === 'admin'" to="/admin">Admin</router-link>
+            <router-link class="links" v-if="userRole === 'admin'" to="/users">Users</router-link>
+            <router-link class="links" v-if="userRole === 'user'" to="/userProfile">User</router-link>
   </nav>
 </template>
  
@@ -55,5 +58,18 @@
 
 </script>
 <style>
+.navbar{
+  background-color: #29516a;
+}
+
+.collapse{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+.nav-item{
+  padding: 10px;
+}
 
 </style>

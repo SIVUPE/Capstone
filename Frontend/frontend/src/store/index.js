@@ -14,8 +14,6 @@ export default createStore({
     services: null,
     service: null
   },
-  getters: {
-  },
   mutations: {
     setUsers(state, value) {
       state.users = value
@@ -33,9 +31,9 @@ export default createStore({
   actions: {
     async register(context, payload) {
       try{
-        console.log(payload);
+        console.log("From the store: ", payload);
         let {msg} = (await axios.post(`${DataURL}users/register`, payload)).data
-        if(msg) {
+        // if(msg) {
           context.dispatch('fetchUsers')
           sweet({
             title: 'Registration',
@@ -45,7 +43,7 @@ export default createStore({
           }) 
           //  
           router.push({name: 'login'})
-        }
+        // }
       }catch(e) {
         sweet({
           title: 'Error',
@@ -113,13 +111,13 @@ export default createStore({
         }) 
       }
     },
-    async deleteUser(context, payload) {
+    async postUser(context, payload) {
       try{
-        let {msg} = await axios.delete(`${DataURL}users/${payload.id}`)
+        let {msg} = await axios.post(`${DataURL}users/post/${payload.id}`)
         if(msg) {
           context.dispatch('fetchUsers')
           sweet({
-            title: 'Delete user',
+            title: 'Add user',
             text: msg,
             icon: "success",
             timer: 2000
@@ -128,12 +126,120 @@ export default createStore({
       }catch(e) {
         sweet({
           title: 'Error',
-          text: 'An error occurred when deleting a user.',
-          icon: "error",
+          text: 'An error occurred when posting a user.',
+          icon: "success",
           timer: 2000
         }) 
       }
     },
+  // async deleteUser(context, payload) {
+  //     try{
+  //       let {msg} = await axios.delete(`${DataURL}users/${payload.id}`)
+  //       if(msg) {
+  //         context.dispatch('fetchUsers')
+  //         sweet({
+  //           title: 'Delete user',
+  //           text: msg,
+  //           icon: "success",
+  //           timer: 2000
+  //         }) 
+  //       }
+  //     }catch(e) {
+  //       sweet({
+  //         title: 'Error',
+  //         text: 'An error occurred when deleting a user.',
+  //         icon: "error",
+  //         timer: 2000
+  //       }) 
+  //     }
+  //   },
+  async deleteUser(context, id) {
+    try {
+      let { msg } = await axios.delete(`$DataURL}users/delete/${id}`);
+
+      context.dispatch("fetchUsers");
+      sweet({
+        title: "Delete user",
+        text: msg,
+        icon: "success",
+        timer: 2000,
+      });
+    } catch (e) {
+      sweet({
+        title: "Error",
+        text: "An error occurred when deleting a user.",
+        icon: "error",
+        timer: 2000,
+      });
+    }
+  },
+
+  async updateService(context, payload) {
+    try {
+      let { msg } = await (
+        await axios.patch(
+          `${DataURL}services/update/${payload.serviceID}`,
+          payload
+        )
+      ).data;
+      context.dispatch("fetchServices");
+      sweet({
+        title: "Update service",
+        text: msg,
+        icon: "success",
+        timer: 2000,
+      });
+    } catch (e) {
+      sweet({
+        title: "Error",
+        text: "An error occurred when updating a service.",
+        icon: "error",
+        timer: 2000,
+      });
+    }
+  },
+  async deleteService(context, payload) {
+    try {
+      let { msg } = await axios.delete(
+        `${DataURL}services/delete/${payload}`
+      );
+
+      context.dispatch("fetchServices");
+      sweet({
+        title: "Delete service",
+        text: msg,
+        icon: "success",
+        timer: 2000,
+      });
+    } catch (e) {
+      sweet({
+        title: "Error",
+        text: "An error occurred when deleting a service.",
+        icon: "error",
+        timer: 2000,
+      });
+    }
+  },
+  async addNewService(context, add) {
+    try {
+      let { msg } = await axios.post(`${DataURL}services/addService`, add);
+
+      context.dispatch("fetchServices");
+      sweet({
+        title: "Adding Service",
+        text: msg,
+        icon: "success",
+        timer: 2000,
+      });
+    } catch (e) {
+      sweet({
+        title: "Error",
+        text: "An error occurred when adding services.",
+        icon: "error",
+        timer: 2000,
+      });
+    }
+  },
     async login(context, payload) {
       try{
        const {msg, token, result} = (await axios.post(`${DataURL}users/login`, payload)).data 
@@ -211,6 +317,5 @@ export default createStore({
     },
 
   },
-  modules: {
-  }
-})
+  modules: {},
+});

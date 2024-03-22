@@ -4,7 +4,7 @@
   <h1 class="masthead-heading">I'm Elegent Book</h1>
 </header>
 
-<section class="aboutme-section">
+<section class="aboutme-section my-5">
   <h1>About Elegent Book</h1>
   <p>Welcome to Elegant Book, your premier solution for refined hotel reservations. Designed with a touch of sophistication, Elegant Book is the ultimate platform for discerning travelers and distinguished hoteliers alike.</p>
 
@@ -14,7 +14,7 @@
   <p>Elegant Book stands out as a top choice for hotel reservations due to its combination of sophistication, ease of use, comprehensive selection, personalized service, and reliability. Whether you're a traveler in search of the perfect hotel or a hotelier looking to elevate your guest experience, Elegant Book is the ideal partner for a seamless and unforgettable stay. </p>
 </section>
 
-<section class="fewthings-section">
+<section class="fewthings-section my-5">
   <h1>A Few Other Things</h1>
   <h2>Why is elegent book different?</h2>
   <p>Elegant Book stands out for its sophisticated branding, curated selection, personalized experience, exceptional service, and commitment to innovation. By offering a refined and luxurious booking experience, Elegant Book sets itself apart as the premier choice for travelers seeking unforgettable stays at top-tier hotels.</p>

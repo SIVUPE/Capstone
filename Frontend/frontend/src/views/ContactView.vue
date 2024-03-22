@@ -29,11 +29,11 @@
     "sans-serif";
 }
 
-/* .container-fluid {
-  background: #0e101f;
+.container-fluid {
+  height: 100vh;
   margin: 0;
   padding: 0;
-} */
+}
 
 *:focus {
   outline: 0;

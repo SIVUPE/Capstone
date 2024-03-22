@@ -1,17 +1,17 @@
 <template>
     <div class="main">
         <div class="container ">
-                <div class="row ">
+          <div class="row mt-5">
             <div class="col">
-                <button class="btn ">Sorting by price</button>
-            </div>
-            <div class="col">
-                <input type="text" placeholder="Search product by name" class="form-control" >
+              <button class="btn">Sort by price</button>
             </div>
             <div class="col">
-                <button class="btn ">Filter by items</button>
+              <input type="text" placeholder="Search product by name" class="form-control" >
             </div>
+            <div class="col">
+              <button class="btn ">Filter by items</button>
             </div>
+          </div>
         <div class="products">
             <div class="row mx-5 gap-5 justify-content-center  " v-if="services">
             <Card v-for="service in services" :key="service.servicesID" class="mb-3 ">
@@ -80,7 +80,10 @@ export default {
   color: #403e3a;
   padding:  10px;
   background-color: transparent;
-  margin-left: 50px;
+  margin-left: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* .main{
     height: 350vh;

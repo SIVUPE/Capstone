@@ -8,7 +8,7 @@
           <div class="invalid-feedback">Please provide a valid email.</div>
           <i class="fa fa-envelope"></i>
         </div>
-        <div class="input-box">
+        <div class="input-box my-4">
           <input type="password" v-model="payload.userPwd" class="form-control" id="password" placeholder="Password" required>
           <div class="invalid-feedback">Please provide your password.</div>
           <i class="fa fa-lock"></i>
@@ -16,7 +16,7 @@
 
         <button @click.prevent="Login" type="submit" class="btn btn-primary">Login</button>
 
-        <p class="mt-3">Don't have an account? <router-link to="/register">Register</router-link></p>
+        <p class="mt-3">Don't have an account? <router-link to="/signUp">Register</router-link></p>
       </form>
     </div>
   </div>
@@ -42,3 +42,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+input{
+  border: 0;
+  border-bottom: 2px solid black;
+}
+</style>
